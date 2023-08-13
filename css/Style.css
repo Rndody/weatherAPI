@@ -1,0 +1,11 @@
+header{
+    background-color: rgba(0, 0, 0, 0.746);
+    border-radius: .0625rem;
+    -webkit-border-radius: .0625rem;
+    -moz-border-radius: .0625rem;
+    -ms-border-radius: .0625rem;
+    -o-border-radius: .0625rem;
+}
+.bg-body-secondary{
+    height: 60vh;
+}
