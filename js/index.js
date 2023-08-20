@@ -1,5 +1,5 @@
 //& #############+++++++ API Variables +++++++#############
-const baseURL = "http://api.weatherapi.com/v1";
+const baseURL = "https://api.weatherapi.com/v1";
 const myKey = "13b4864ff12d4a41bad114252231208";
 
 
