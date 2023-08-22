@@ -41,28 +41,48 @@ searchInput.addEventListener("keyup", function () {
 
 })
 
+function showPosition(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    console.log(latitude,longitude)
+}
 getLocationBtn.addEventListener("click", function () {
     let statusP = document.getElementById("status");
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition, checkError);
         } else {
             statusP.innerHTML = "Geolocation is not supported by this browser. Please use the search bar";
         }
     }
 
-    function showPosition(position) {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-    }
+    getLocation();
+    geolocationFetch();
 
-    //! ############+++++ fetch geolocation function ++++++++++########### 
-    async function geolocationFetch() {
-        let fetchResponse = await fetch(`${baseURL}/forecast.json?key=${myKey}&q=${latitude},${longitude}&days=3`);
-        let jsonObject = await fetchResponse.json();
-        return jsonObject;
-    }
 })
+
+//! ############+++++ fetch geolocation function ++++++++++########### 
+async function geolocationFetch() {
+    let fetchResponse = await fetch(`${baseURL}/forecast.json?key=${myKey}&q=${latitude},${longitude}&days=3`);
+    let jsonObject = await fetchResponse.json();
+    return jsonObject;
+}
+
+const checkError = (error) => {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            locationDiv.innerText = "Please allow access to location";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            //usually fired for firefox
+            locationDiv.innerText = "Location Information unavailable";
+            break;
+        case error.TIMEOUT:
+            locationDiv.innerText = "The request to get user location timed out";
+    }
+};
+
+
 
 
 
@@ -93,6 +113,7 @@ function todayWeather(data) {
     wind.innerHTML = data.current.wind_kph + " Km/H";
     direction.innerHTML = data.current.wind_dir;
     iconImg.setAttribute("scr", data.current.condition.icon);
+
 }
 
 

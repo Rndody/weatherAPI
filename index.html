@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/Style.css">
 </head>
 
-<body class="bg-dark text-danger-emphasis">
+<body class="">
     <div class="container">
         <input id="search" class="form-control w-100 rounded-pill px-4 my-4" placeholder="SEARCH" type="text">
         <p id="status"></p>
@@ -29,23 +29,23 @@
 
             <div id="today" class="col-lg-4    ">
                 <div class="m-1 rounded-3 bg-body-secondary ">
-                    <header class="d-flex justify-content-around rounded-top-3  text-danger">
+                    <header class="d-flex justify-content-around rounded-top-3 ">
                         <p id="dayP" class="m-1"> Monday</p>
                         <p id="dateP" class="m-1">7 December</p>
                     </header>
-                    <div class="px-2 mt-3 py-3 ">
+                    <div class="px-2  py-3 my-card">
 
                         <main>
                             <p id="cityName" class="fs-3">Matrooh</p>
                             <p class="d-flex justify-content-between px-3">
                                 <span id="temperature" class="fs-1">22&deg;C </span>
-                                <span id="iconImg">
-                                    <sup><img src="weather/day/113.png" alt="Weather img"></sup>
+                                <span >
+                                    <sup><img id="iconImg" src="weather/day/113.png" alt="Weather img"></sup>
                                 </span>
                             </p>
                             <p id="WeatherInfo">Sunny</p>
                         </main>
-                        <footer class="d-flex justify-content-between px-1">
+                        <footer class="d-flex justify-content-between px-1 py-3">
                             <p>
                                 <i class="fa-solid fa-droplet"></i> <span id="humidity"> 50% </span>
                             </p>
@@ -69,8 +69,8 @@
             <div id="tomorrow" class="col-lg-4   ">
 
                 <div class="m-1 rounded-3 bg-body-secondary ">
-                    <header class="followingDayName p-1 rounded-top-3 text-center  text-danger">Tuesday</header>
-                    <div class="p-2 mt-3 d-flex flex-column align-items-center">
+                    <header class="followingDayName p-1 rounded-top-3 text-center ">Tuesday</header>
+                    <div class="px-2 py-4  d-flex flex-column align-items-center my-card">
                         <img class="followingDayImg" src="weather/day/116.png" alt="wether img">
                         <p class="maxTemp fs-1">21&deg;C</p>
                         <p class="minTemp fs-4">11&deg;C</p>
@@ -85,8 +85,8 @@
             <div id="afterTomorrow" class="col-lg-4   ">
 
                 <div class="m-1 rounded-3 bg-body-secondary  ">
-                    <header class="followingDayName p-1 rounded-top-3 text-center  text-danger ">Wednesday</header>
-                    <div class="p-2 mt-3 d-flex flex-column align-items-center">
+                    <header class="followingDayName p-1 rounded-top-3 text-center  ">Wednesday</header>
+                    <div class="px-2 py-4  d-flex flex-column align-items-center my-card">
                         <img class="followingDayImg" src="weather/day/119.png" alt="wether img">
                         <p class="maxTemp fs-1">23&deg;C</p>
                         <p class="minTemp fs-4">9&deg;C</p>
