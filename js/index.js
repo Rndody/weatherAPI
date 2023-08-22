@@ -82,11 +82,6 @@ const checkError = (error) => {
     }
 };
 
-
-
-
-
-
 //! ############+++++ fetch function ++++++++++########### 
 
 async function fetchWeather(cityName) {
@@ -95,8 +90,6 @@ async function fetchWeather(cityName) {
     // ourData=jsonObject;
     return jsonObject;
 }
-
-
 
 //! ############+++++ Today Wether function ++++++++++########### 
 function todayWeather(data) {
@@ -115,7 +108,6 @@ function todayWeather(data) {
     iconImg.setAttribute("scr", data.current.condition.icon);
 
 }
-
 
 //! ############+++++ following days Wether function ++++++++++########### 
 function followingDaysWeather(data) {
