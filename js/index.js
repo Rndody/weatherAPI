@@ -10,7 +10,7 @@ let getLocationBtn = document.getElementById("getLocationBtn");
 //& #############+++++++ geolocation Variables +++++++#############
 let latitude;
 let longitude;
-
+let ourVariable;
 //& #############+++++++ Card One Variables +++++++#############
 
 let dayP = document.getElementById("dayP");
@@ -37,37 +37,17 @@ let followingDayName = document.getElementsByClassName("followingDayName")
 // let ourData;
 //^#########################+++++++ Events ++++++++++++++++++########################
 searchInput.addEventListener("keyup", function () {
-    playApp(searchInput.value);
-
+    if (searchInput.value.length >= 3) {
+        playApp(searchInput.value);
+    }
 })
 
 function showPosition(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    console.log(latitude,longitude)
+
+    console.log(latitude, longitude)
 }
-getLocationBtn.addEventListener("click", function () {
-    let statusP = document.getElementById("status");
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, checkError);
-        } else {
-            statusP.innerHTML = "Geolocation is not supported by this browser. Please use the search bar";
-        }
-    }
-
-    getLocation();
-    geolocationFetch();
-
-})
-
-//! ############+++++ fetch geolocation function ++++++++++########### 
-async function geolocationFetch() {
-    let fetchResponse = await fetch(`${baseURL}/forecast.json?key=${myKey}&q=${latitude},${longitude}&days=3`);
-    let jsonObject = await fetchResponse.json();
-    return jsonObject;
-}
-
 const checkError = (error) => {
     switch (error.code) {
         case error.PERMISSION_DENIED:
@@ -81,6 +61,34 @@ const checkError = (error) => {
             locationDiv.innerText = "The request to get user location timed out";
     }
 };
+
+
+function getLocation() {
+    let statusP = document.getElementById("status");
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, checkError);
+    } else {
+        statusP.innerHTML = "Geolocation is not supported by this browser. Please use the search bar";
+    }
+}
+
+
+getLocationBtn.addEventListener("click", function () {
+
+    getLocation();
+    geolocationFetch();
+
+})
+
+//! ############+++++ fetch geolocation function ++++++++++########### 
+async function geolocationFetch() {
+    let fetchResponse = await fetch(`${baseURL}/forecast.json?key=${myKey}&q=${latitude},${longitude}&days=3`);
+    let jsonObject = await fetchResponse.json();
+    return jsonObject;
+}
+
+
 
 //! ############+++++ fetch function ++++++++++########### 
 
@@ -105,7 +113,7 @@ function todayWeather(data) {
     humidity.innerHTML = data.current.humidity + " %";
     wind.innerHTML = data.current.wind_kph + " Km/H";
     direction.innerHTML = data.current.wind_dir;
-    iconImg.setAttribute("scr", data.current.condition.icon);
+    iconImg.setAttribute("scr", "https:" + data.current.condition.icon);
 
 }
 
@@ -117,7 +125,7 @@ function followingDaysWeather(data) {
         let folowingDayNameDate = new Date(ourData[i + 1].date);
         followingDayName[i].innerHTML = folowingDayNameDate.toLocaleDateString("en-US", { weekday: "long" });
 
-        followingDayImg[i].setAttribute = ("scr", ourData[i + 1].day.condition.icon);
+        followingDayImg[i].setAttribute = ("scr", "https:" + ourData[i + 1].day.condition.icon);
         maxTemp[i].innerHTML = ourData[i + 1].day.maxtemp_c + "&deg;C";
         minTemp[i].innerHTML = ourData[i + 1].day.mintemp_c + "&deg;C";
         followingDayWeatherInfo[i].innerHTML = ourData[i + 1].day.condition.text;
@@ -126,7 +134,7 @@ function followingDaysWeather(data) {
 
 //! ############+++++ Play Application function ++++++++++########### 
 
-async function playApp(city = "cairo") {
+async function playApp(city = "paris") {
     // let jsonObject=await geolocationFetch();
     jsonObject = await fetchWeather(city);
     if (jsonObject) {
